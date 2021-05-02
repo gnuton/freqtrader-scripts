@@ -29,7 +29,7 @@ if test "$#" -eq 0; then
   echo -e ""
   echo -e "Please fill in the following info"
 
-  STRATEGY="$(ask_for_input "Enter your strategy" $D_PAIR)"
+  STRATEGY="$(ask_for_input "Enter your strategy" $D_STRATEGY)"
   PAIR="$(ask_for_input "Pair" $D_PAIR)"
   START_DATE="$(ask_for_input "Enter start date" $D_START_DATE)"
   END_DATE="$(ask_for_input "Enter your end date" $D_END_DATE)"
@@ -47,5 +47,5 @@ fi
 
 echo -e "Downloading data for $STRATEGY/$PAIR/$TIME_RANGE"
 cd ft_userdata
-docker-compose run --rm freqtrade plot-dataframe --strategy $STRATEGY -p $PAIR --timerange=$TIME_RANGE
+docker-compose run --rm freqtrade plot-dataframe --strategy $STRATEGY -p $PAIR #--timerange=$TIME_RANGE
 
