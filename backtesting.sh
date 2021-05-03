@@ -2,8 +2,8 @@
 set -e
 
 D_STRATEGY="SampleStrategy"
-D_START_DATE="20190801"
-D_END_DATE="20191001"
+D_START_DATE="$(date +'%Y%m%d' --date='-1 month')"
+D_END_DATE="$(date +'%Y%m%d')" #NOW
 D_TIMEFRAME="15m"
 D_PAIR="ETH/BTC"
 D_EXCHANGE="binance"
@@ -22,7 +22,12 @@ function ask_for_input() {
   echo $VAL
 }
 
-STRATEGY="$(ask_for_input "Enter your strategy" $D_STRATEGY)"
+echo "Available Strategies"
+for f in ./ft_userdata/user_data/strategies/*.py; do
+  printf " - ${GREEN}${f}${DEF_COLOR}\n" >&2
+done
+
+STRATEGY="$(ask_for_input "Please choose one of the above available strategies" $D_STRATEGY)"
 START_DATE="$(ask_for_input "Enter start date" $D_START_DATE)"
 END_DATE="$(ask_for_input "Enter your end date" $D_END_DATE)"
 TIMEFRAME="$(ask_for_input "Enter your timeframe" $D_TIMEFRAME)"
