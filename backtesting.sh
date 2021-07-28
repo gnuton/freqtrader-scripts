@@ -5,7 +5,7 @@ D_STRATEGY="SampleStrategy"
 D_START_DATE="$(date +'%Y%m%d' --date='-1 month')"
 D_END_DATE="$(date +'%Y%m%d')" #NOW
 D_TIMEFRAME="15m"
-D_PAIR="ETH/BTC"
+D_PAIR="BTC/USDT"
 D_EXCHANGE="binance"
 
 #COLORS
@@ -39,5 +39,5 @@ EXCHANGE="$(ask_for_input "Enter your exchange" $D_EXCHANGE)"
 
 echo -e "Backtesting is lanching for $TIME_RANGE"
 cd ft_userdata
-docker-compose run --rm freqtrade backtesting --config user_data/config.json --strategy ${STRATEGY} --timerange ${TIME_RANGE} -i ${TIMEFRAME} 
+docker-compose run --rm freqtrade backtesting --config user_data/config.json --strategy ${STRATEGY} --timerange ${TIME_RANGE} -i ${TIMEFRAME} -p ${PAIR} 
 
