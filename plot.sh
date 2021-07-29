@@ -39,6 +39,9 @@ EXCHANGE="$(ask_for_input "Enter your exchange" $D_EXCHANGE)"
 
 echo -e "Backtesting is lanching for $TIME_RANGE"
 cd ft_userdata
-docker-compose -f docker-compose.yml -f docker-compose.plot.yml run --rm freqtrade plot-dataframe --strategy ${STRATEGY} --timerange ${TIME_RANGE} -i ${TIMEFRAME} -p ${PAIR}
+docker-compose run --rm freqtrade backtesting --config user_data/config.json --strategy ${STRATEGY} --timerange ${TIME_RANGE} -i ${TIMEFRAME} -p ${PAIR}
+
+echo -e "Plotting is lanching for $TIME_RANGE"
+docker-compose -f docker-compose.yml -f docker-compose.plot.yml run --rm freqtrade plot-dataframe --config user_data/config.json --strategy ${STRATEGY} --timerange ${TIME_RANGE} -i ${TIMEFRAME} -p ${PAIR}
 echo -e "The plot has been created in ft_userdata/user_data/plot/. Please open it with your browser."
 ls user_data/plot/
