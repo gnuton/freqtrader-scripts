@@ -17,8 +17,13 @@ quick-start.sh
 ```
 
 The scripts support all the basic commands you may need during the BOT operations.
-- Quick setup - Downloads the docker imanges and runs it
-- Start -
-- Reading logs
-- Check the status of the app
-- ...
+- Quick setup - Downloads the docker imanges, generates a basic config file and it runs it
+- 
+- Start - Starts a freqtrade instance
+- Stop - Stop a freqtrade instance
+- Update - Update freqtrade docker image
+- Logs - Read the logs of the runing local instance
+- Status - Checks the status of the running instance
+- Backtesting - Runs freqtrade in docker for backtest strategies for a pair 
+- Plot - Plots the strategy for a pair
+- ... 
