@@ -37,12 +37,13 @@ if test "$#" -eq 0; then
   EXCHANGE="$(ask_for_input "Enter your exchange" $D_EXCHANGE)"
   SKIP_FETCHING="$(ask_for_input "Do you wanna skip fetching data from the internet?" $D_SKIP_FETCHING)"
   TIME_RANGE="${START_DATE}-${END_DATE}"
-elif test "$#" -eq 4; then
+elif test "$#" -eq 5; then
   # Takes input params from args
   PAIR=$1
   EXCHANGE=$2
   TIME_RANGE=$3
-  TIMEFRAME=$4  
+  TIMEFRAME=$4
+  SKIP_FETCHING=$5
 else
   echo -n "Invalid number of parameters"
   exit -1

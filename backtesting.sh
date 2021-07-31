@@ -7,6 +7,7 @@ D_END_DATE="$(date +'%Y%m%d')" #NOW
 D_TIMEFRAME="15m"
 D_PAIR="BTC/USDT"
 D_EXCHANGE="binance"
+D_SKIP_FETCHING="n"
 
 #COLORS
 DEF_COLOR="\e[0m"
@@ -34,8 +35,9 @@ TIMEFRAME="$(ask_for_input "Enter your timeframe" $D_TIMEFRAME)"
 TIME_RANGE="${START_DATE}-${END_DATE}"
 PAIR="$(ask_for_input "Pair" $D_PAIR)"
 EXCHANGE="$(ask_for_input "Enter your exchange" $D_EXCHANGE)"
+SKIP_FETCHING="$(ask_for_input "Do you wanna skip data fetching?" $D_SKIP_FETCHING)"
 
-./download-data.sh ${PAIR} ${EXCHANGE} ${TIME_RANGE} ${TIMEFRAME}
+./download-data.sh ${PAIR} ${EXCHANGE} ${TIME_RANGE} ${TIMEFRAME} ${SKIP_FETCHING}
 
 echo -e "Backtesting is lanching for $TIME_RANGE"
 cd ft_userdata
