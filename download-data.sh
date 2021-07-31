@@ -3,9 +3,10 @@ set -e
 
 D_PAIR="ETH/BTC"
 D_START_DATE="20190801"
-D_END_DATE="20191001"
+#D_END_DATE="20191001" # End data is not needed data are fetched from start date to present 
 D_TIMEFRAME="15m"
 D_EXCHANGE="binance"
+D_SKIP_FETCHING="n"
 
 #COLORS
 DEF_COLOR="\e[0m"
@@ -31,9 +32,10 @@ if test "$#" -eq 0; then
 
   PAIR="$(ask_for_input "Pair" $D_PAIR)"
   START_DATE="$(ask_for_input "Enter start date" $D_START_DATE)"
-  END_DATE="$(ask_for_input "Enter your end date" $D_END_DATE)"
+  #END_DATE="$(ask_for_input "Enter your end date" $D_END_DATE)"
   TIMEFRAME="$(ask_for_input "Enter your timeframe" $D_TIMEFRAME)"
   EXCHANGE="$(ask_for_input "Enter your exchange" $D_EXCHANGE)"
+  SKIP_FETCHING="$(ask_for_input "Do you wanna skip fetching data from the internet?" $D_SKIP_FETCHING)"
   TIME_RANGE="${START_DATE}-${END_DATE}"
 elif test "$#" -eq 4; then
   # Takes input params from args
@@ -46,8 +48,10 @@ else
   exit -1
 fi
   
-
-echo -e "Downloading data for $PAIR/$EXCHANGE/$TIME_RANGE"
-cd ft_userdata
-docker-compose run --rm freqtrade download-data --pairs ${PAIR} --exchange ${EXCHANGE} --timerange ${TIME_RANGE} -t ${TIMEFRAME}
-
+if [ "$SKIP_FETCHING" == "$D_SKIP_FETCHING" ]; then
+  echo -e "Downloading data for $PAIR/$EXCHANGE/$TIME_RANGE"
+  cd ft_userdata
+  docker-compose run --rm freqtrade download-data --pairs ${PAIR} --exchange ${EXCHANGE} -t ${TIMEFRAME} -v --timerange ${TIME_RANGE}  
+else
+  echo -e "Data not fetched"
+fi
