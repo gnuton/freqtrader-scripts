@@ -2,7 +2,7 @@
 set -e
 
 D_STRATEGY="SampleStrategy"
-D_START_DATE="$(date +'%Y%m%d' --date='-1 month')"
+D_START_DATE="$(date +'%Y%m%d' --date='-1 year')"
 D_END_DATE="$(date +'%Y%m%d')" #NOW
 D_TIMEFRAME="15m"
 D_PAIR="BTC/USDT"
@@ -41,5 +41,4 @@ SKIP_FETCHING="$(ask_for_input "Do you wanna skip data fetching?" $D_SKIP_FETCHI
 
 echo -e "Backtesting is lanching for $TIME_RANGE"
 cd ft_userdata
-docker-compose run --rm freqtrade backtesting --config user_data/config.json --strategy ${STRATEGY} --timerange ${TIME_RANGE} -i ${TIMEFRAME} -p ${PAIR} 
-
+docker-compose -f docker-compose.yml -f docker-compose.custom.yml run --rm freqtrade backtesting --config user_data/config.json --strategy ${STRATEGY} --timerange ${TIME_RANGE} -i ${TIMEFRAME} -p ${PAIR} 

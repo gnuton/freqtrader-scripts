@@ -1,0 +1,8 @@
+---
+version: '3'
+services:
+  freqtrade:
+    image: freqtrade:local
+    build:
+       context: .
+       dockerfile: "./Dockerfile"
